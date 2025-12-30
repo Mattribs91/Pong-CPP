@@ -5,21 +5,32 @@
 #ifndef PONG_C_BALLE_H
 #define PONG_C_BALLE_H
 #include <SDL.h>
+#include "Raquette.h"
 
 class Balle {
 private:
-    int _positionX;
-    int _positionY;
+  float _positionX;
+  float _positionY;
+  float _vitesseX;
+  float _vitesseY;
 
 public:
-    Balle();
-    Balle(int positionX, int positionY);
-    void afficher(SDL_Renderer* lePinceau) const;
-    void monter();
-    void droite();
-    bool toucheMur() const;
-    void getY() const;
+  Balle();
+  Balle(float positionX, float positionY, float vitesseX, float vitesseY);
+  void afficher(SDL_Renderer *lePinceau) const;
+  void monter();
+  void avancer(double dt);
+
+  bool sortGauche() const;
+  bool sortDroite() const;
+  void getY() const;
+
+  bool toucheRaquette(const Raquette &raquette) const;
+  void rebondir(const Raquette &raquette);
+
+  void rebondMurs();
+
+  void reinitialiser();
 };
 
-
-#endif //PONG_C_BALLE_H
+#endif // PONG_C_BALLE_H

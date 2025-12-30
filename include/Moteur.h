@@ -33,7 +33,16 @@ enum Evenement {
   ESPACE_APPUYE,
   ESPACE_RELACHE,
   QUITTER_APPUYE,
-  QUITTER_RELACHE
+  QUITTER_RELACHE,
+
+  Z_APPUYE,
+  Z_RELACHE,
+  Q_APPUYE,
+  Q_RELACHE,
+  S_APPUYE,
+  S_RELACHE,
+  D_APPUYE,
+  D_RELACHE
 };
 
 class Moteur {
@@ -43,6 +52,8 @@ class Moteur {
   int _fps;
   int _temps;
   Uint32 _startFrame;
+  Uint32 _ancienTemps;
+  double _deltaTime;
 
 public:
   // Constructeur qui initialise le moteur, la fenetre, etc.
@@ -69,6 +80,9 @@ public:
 
   // Renvoie true s'il faut mettre a jour les animations
   bool animationsAmettreAjour();
+
+  // Renvoie le temps ecoule depuis la derniere image (en secondes)
+  double getDeltaTime() const;
 
   // Met le jeu en pause pendant un certain nombre de secondes
   // (ATTENTION : le jeu ne répond plus lorsqu'il est en pause,

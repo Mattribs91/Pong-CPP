@@ -30,6 +30,7 @@ Moteur::Moteur(const std::string &nomDuJeu, int fps) {
   SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
 
   _temps = SDL_GetTicks();
+  _ancienTemps = 0;
   _fps = fps;
 }
 
@@ -41,7 +42,16 @@ Moteur::~Moteur() {
 }
 
 void Moteur::initialiserRendu() {
-  _startFrame = SDL_GetTicks();
+  Uint32 tempsActuel = SDL_GetTicks();
+  // Si c'est la premiere frame, on initialise _ancienTemps
+  if (_ancienTemps == 0) {
+    _ancienTemps = tempsActuel;
+  }
+
+  _deltaTime = (tempsActuel - _ancienTemps) / 1000.0;
+  _ancienTemps = tempsActuel;
+
+  _startFrame = tempsActuel;
   // On remplie la fenetre avec du noir
   SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
   SDL_RenderClear(_renderer);
@@ -77,6 +87,14 @@ Evenement Moteur::evenementRecu() const {
         return BAS_APPUYE;
       if (ev.key.keysym.sym == SDLK_ESCAPE)
         return QUITTER_APPUYE;
+      if (ev.key.keysym.sym == SDLK_z)
+        return Z_APPUYE;
+      if (ev.key.keysym.sym == SDLK_q)
+        return Q_APPUYE;
+      if (ev.key.keysym.sym == SDLK_s)
+        return S_APPUYE;
+      if (ev.key.keysym.sym == SDLK_d)
+        return D_APPUYE;
     } else if (ev.type == SDL_KEYUP) {
       if (ev.key.keysym.sym == SDLK_SPACE)
         return ESPACE_RELACHE;
@@ -90,6 +108,14 @@ Evenement Moteur::evenementRecu() const {
         return BAS_RELACHE;
       if (ev.key.keysym.sym == SDLK_ESCAPE)
         return QUITTER_RELACHE;
+      if (ev.key.keysym.sym == SDLK_z)
+        return Z_RELACHE;
+      if (ev.key.keysym.sym == SDLK_q)
+        return Q_RELACHE;
+      if (ev.key.keysym.sym == SDLK_s)
+        return S_RELACHE;
+      if (ev.key.keysym.sym == SDLK_d)
+        return D_RELACHE;
     }
   }
   return AUCUN;
@@ -111,3 +137,5 @@ void Moteur::attendre(double secondes) const {
 }
 
 SDL_Renderer *Moteur::getRenderer() { return _renderer; }
+
+double Moteur::getDeltaTime() const { return _deltaTime; }
