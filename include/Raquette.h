@@ -17,6 +17,9 @@ public:
     void afficher(SDL_Renderer* lePinceau) const;
     bool toucheBalle() const;
     void getY() const;
+
+    void monter();
+    void descendre();
 };
 
 #endif //PONG_C_RAQUETTE_H

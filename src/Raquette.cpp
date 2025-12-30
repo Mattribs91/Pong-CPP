@@ -25,7 +25,15 @@ void Raquette::afficher(SDL_Renderer* lePinceau) const {
     rect.x = _positionX;
     rect.y = _positionY;
     rect.w = 20;
-    rect.h = 50;
+    rect.h = 120;
 
     SDL_RenderFillRect(lePinceau, &rect);
+}
+
+void Raquette::descendre() {
+    _positionY += 1;
+}
+
+void Raquette::monter() {
+    _positionY -= 1;
 }

@@ -36,23 +36,23 @@ enum Evenement {
   QUITTER_RELACHE
 };
 
-class Moteur
-{
+class Moteur {
   // Structures internes de la SDL
-  SDL_Window* _window;
-  SDL_Renderer* _renderer;
+  SDL_Window *_window;
+  SDL_Renderer *_renderer;
   int _fps;
   int _temps;
+  Uint32 _startFrame;
 
 public:
-
   // Constructeur qui initialise le moteur, la fenetre, etc.
-  // Par defaut la fenetre fait 160 x 128 pixels (grossi 5 fois pour l'affichage)
+  // Par defaut la fenetre fait 160 x 128 pixels (grossi 5 fois pour
+  // l'affichage)
   // -> l'univers de jeu se fait sur 160 x 128 pixels (c'est arbitraire),
   //    soit une grille de 10x8 cases de 16 pixels de côté
   // L'argument FPS permet de regler la vitesse des animations
   // (8 FPS = 8 images par seconde)
-  Moteur(const std::string& nomDuJeu, int fps = 8);
+  Moteur(const std::string &nomDuJeu, int fps);
 
   // Destructeur qui ferme le moteur et libere la memoire
   ~Moteur();
@@ -60,7 +60,8 @@ public:
   // Initalise l'image par un ecran noir
   void initialiserRendu();
 
-  // Finalise l'image et l'envoie a la carte graphique pour affichage sur l'ecran
+  // Finalise l'image et l'envoie a la carte graphique pour affichage sur
+  // l'ecran
   void finaliserRendu();
 
   // Renvoie le dernier evenement recu (AUCUN si rien n'est recu)
@@ -75,7 +76,7 @@ public:
   void attendre(double secondes) const;
 
   // (Pour un usage interne, vous n'aurez jamais besoin de cette methode.)
-  SDL_Renderer* getRenderer();
+  SDL_Renderer *getRenderer();
 };
 
 #endif // MOTEUR_H

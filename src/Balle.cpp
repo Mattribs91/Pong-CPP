@@ -34,6 +34,10 @@ void Balle::monter() {
     _positionY += 1;
 }
 
+void Balle::droite() {
+    _positionX += 1;
+}
+
 bool Balle::toucheMur() const {
     if (_positionY < 0) {
         return true;

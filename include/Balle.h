@@ -16,6 +16,7 @@ public:
     Balle(int positionX, int positionY);
     void afficher(SDL_Renderer* lePinceau) const;
     void monter();
+    void droite();
     bool toucheMur() const;
     void getY() const;
 };

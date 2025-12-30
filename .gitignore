@@ -1,0 +1,23 @@
+# MacOS
+.DS_Store
+
+# CMake
+cmake-build-debug/
+build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+
+# Compiled binaries
+bin/
+*.o
+*.a
+*.so
+*.dylib
+Pong_C++
